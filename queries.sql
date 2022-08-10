@@ -20,3 +20,15 @@ ROLLBACK;
 SELECT * FROM animals;
 
 -- update species to digimon
+BEGIN;
+UPDATE animals SET species = 'digimon' WHERE name LIKE '%mon';
+UPDATE animals SET species = 'pokemon' WHERE species is NULL;
+COMMIT;
+SELECT * FROM animals;
+
+-- delete animals table
+BEGIN;
+DELETE FROM animals;
+SELECT * FROM ANIMALS;
+ROLLBACK;
+SELECT * FROM ANIMALS;
