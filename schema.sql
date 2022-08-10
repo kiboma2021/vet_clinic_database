@@ -1,8 +1,4 @@
-/* Database schema to keep the structure of entire database. */
-
-CREATE TABLE animals (
-    name varchar(100)
-);
+/* vet_clinic database. */
 
 CREATE TABLE animals(
     id INT PRIMARY KEY NOT NULL,
@@ -11,4 +7,6 @@ CREATE TABLE animals(
     escape_attempts INT,
     neutered BOOLEAN,
     weight_kg DECIMAL
-    );
+);
+
+ALTER TABLE animals ADD species VARCHAR(255);

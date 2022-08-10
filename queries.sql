@@ -8,3 +8,53 @@ SELECT name, escape_attempts FROM animals WHERE weight_kg > 10.5;
 SELECT * FROM animals WHERE neutered = true;
 SELECT * FROM animals WHERE name != 'Gabumon';
 SELECT * FROM animals WHERE weight_kg >= 10.4 AND weight_kg <=17.3;
+
+-- TRANSACTION FOR UPDATING SPECIES COLUMN WITH UNSPECIFIED and ROLLBACK
+
+BEGIN;
+UPDATE animals SET species = 'unspecified';
+SELECT * FROM animals;
+
+-- rollback to previous state
+ROLLBACK;
+SELECT * FROM animals;
+
+-- update species to digimon
+BEGIN;
+UPDATE animals SET species = 'digimon' WHERE name LIKE '%mon';
+UPDATE animals SET species = 'pokemon' WHERE species is NULL;
+COMMIT;
+SELECT * FROM animals;
+
+-- delete animals table
+BEGIN;
+DELETE FROM animals;
+SELECT * FROM animals;
+ROLLBACK;
+SELECT * FROM animals;
+
+-- Delete all animals born after Jan 1st, 2022.
+BEGIN;
+DELETE FROM animals WHERE date_of_birth > 'Jan-01-2022';
+SAVEPOINT ANIMALS_AFTER_JAN;
+SELECT * FROM animals;
+
+-- Update all animals' weight to be their weight multiplied by -1.
+UPDATE animals SET weight_kg = weight_kg * -1;
+SELECT * FROM animals;
+ROLLBACK TO ANIMALS_AFTER_JAN;
+SELECT * FROM animals;
+
+-- Update all animals' weights that are negative to be their weight multiplied by -1
+UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
+SELECT * FROM animals;
+COMMIT;
+SELECT * FROM animals;
+
+-- queries for animals table
+SELECT COUNT(*) FROM animals;
+SELECT COUNT(*) FROM animals WHERE escape_attempts = 0;
+SELECT AVG(weight_kg) FROM animals;
+SELECT neutered, SUM(escape_attempts) FROM animals GROUP BY neutered;
+SELECT SPECIES, MIN(WEIGHT_KG) , MAX(WEIGHT_KG) FROM ANIMALS GROUP BY SPECIES;
+SELECT SPECIES, AVG(ESCAPE_ATTEMPTS) FROM ANIMALS WHERE DATE_OF_BIRTH BETWEEN '1990-01-01' AND '2000-12-31' GROUP BY SPECIES;
