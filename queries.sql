@@ -29,6 +29,24 @@ SELECT * FROM animals;
 -- delete animals table
 BEGIN;
 DELETE FROM animals;
-SELECT * FROM ANIMALS;
+SELECT * FROM animals;
 ROLLBACK;
-SELECT * FROM ANIMALS;
+SELECT * FROM animals;
+
+-- Delete all animals born after Jan 1st, 2022.
+BEGIN;
+DELETE FROM animals WHERE date_of_birth > 'Jan-01-2022';
+SAVEPOINT ANIMALS_AFTER_JAN;
+SELECT * FROM animals;
+
+-- Update all animals' weight to be their weight multiplied by -1.
+UPDATE animals SET weight_kg = weight_kg * -1;
+SELECT * FROM animals;
+ROLLBACK TO ANIMALS_AFTER_JAN;
+SELECT * FROM animals;
+
+-- Update all animals' weights that are negative to be their weight multiplied by -1
+UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
+SELECT * FROM animals;
+COMMIT;
+SELECT * FROM animals;
