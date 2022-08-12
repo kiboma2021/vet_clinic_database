@@ -34,3 +34,18 @@ ON DELETE CASCADE;
 ALTER TABLE animals ADD COLUMN owner_id INT;
 ALTER TABLE animals ADD FOREIGN KEY (owner_id) REFERENCES owners(id)
 ON DELETE CASCADE;
+
+CREATE TABLE vets(
+    id INT GENERATED ALWAYS AS IDENTITY, 
+    name VARCHAR(255) NOT NULL, 
+    age INT NOT NULL, 
+    date_of_graduation DATE NOT NULL, 
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE specializations(
+    id INT GENERATED ALWAYS AS IDENTITY,
+    species_id INT , 
+    vets_id INT, 
+);
