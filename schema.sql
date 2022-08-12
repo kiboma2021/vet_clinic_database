@@ -49,3 +49,6 @@ CREATE TABLE specializations(
     species_id INT , 
     vets_id INT, 
 );
+
+ALTER TABLE specializations ADD FOREIGN KEY (species_id) REFERENCES species (id);
+ALTER TABLE specializations ADD FOREIGN KEY (vets_id) REFERENCES vets (id);
