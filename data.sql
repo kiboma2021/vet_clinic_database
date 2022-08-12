@@ -50,3 +50,11 @@ UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name  = 'Jennife
 UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name  = 'Bob') WHERE name IN('Devimon', 'Plantmon'); 
 UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name  = 'Melody Pond') WHERE name IN('Charmander', 'Squirtle', 'Blossom'); 
 UPDATE animals SET owner_id = (SELECT id FROM owners WHERE full_name  = 'Dean Winchester') WHERE name IN('Angemon' , 'Boarmon');
+
+insert into vets (name, age, date_of_graduation) values ('William Tatcher', 45, 'Apr 4, 1981'), ('Maisy Smith', 26, 'Jan 17, 2019'), ('Stephanie Mendez', 64, 'May 4, 1981'), ('Jack Harkness', 38, 'Jun 8, 2008');
+
+-- Specialties data 
+INSERT INTO specializations (species_id, vets_id) SELECT species.id, vets.id FROM species INNER JOIN vets ON species.name = 'Pokemon' AND vets.name = 'William Tatche';
+INSERT INTO specializations (species_id, vets_id) SELECT species.id, vets.id FROM species INNER JOIN vets ON species.name In('Pokemon', 'Digimon') AND vets.name = 'Stephanie Mendez';
+INSERT INTO specializations (species_id, vets_id) SELECT species.id, vets.id FROM species INNER JOIN vets ON species.name = 'Digimon' AND vets.name = 'Jack Harkness';
+
