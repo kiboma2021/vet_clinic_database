@@ -62,3 +62,6 @@ CREATE TABLE visits (
 
 ALTER TABLE visits ADD FOREIGN KEY (vets_id) REFERENCES vets (id);
 ALTER TABLE visits ADD FOREIGN KEY (animals_id) REFERENCES animals (id);
+
+--Database performance audit
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
