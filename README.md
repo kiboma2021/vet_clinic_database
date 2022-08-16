@@ -8,6 +8,9 @@
 - clinic employees
 - visits
 
+## Database schema
+![ERD_vet_clinic](https://user-images.githubusercontent.com/93031593/184982611-25cd9eb4-205f-4776-9e33-67591e445885.png)
+
 ## Getting Started
 
 This repository includes files with plain SQL that can be used to recreate a database:
